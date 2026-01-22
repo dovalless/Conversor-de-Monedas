@@ -1,54 +1,158 @@
-<p align="center">
-  <img src=https://github.com/DavidVF7/Conversor-de-Monedas/assets/103916971/645bfae6-38cf-4f90-add7-8f9b3929cb5a"
-</p>
+# 💱 Conversor de Monedas - Challenge Alura Latam & Oracle ONE
 
-# Conversor de Monedas 💵💱💶
+<div align="center">
 
-Desarrollado como parte del Challenge Conversor de Monedas, propuesto por Alura Latam en colaboración con Oracle en el programa ONE, como parte de la especialización Back-End.
+**Una aplicación de consola en Java que convierte divisas con tasas en tiempo real y guarda un historial de tus operaciones.**
 
-## Descripción 📝
+[![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![License](https://img.shields.io/badge/Licencia-MIT-green?style=for-the-badge)](LICENSE)
+[![Oracle ONE](https://img.shields.io/badge/Challenge-Oracle_ONE-FF0000?style=for-the-badge)](https://www.oracle.com/ar/education/oracle-next-education/)
 
-Este proyecto es un Conversor de Monedas desarrollado en Java que te permite convertir diferentes divisas utilizando una API de tasas de cambio en tiempo real. Con este conversor, se pueden realizar solicitudes a la API, analizar la respuesta JSON, filtrar las monedas de interés y mostrar los resultados a los usuarios de manera clara y concisa. Además, la aplicación guarda un historial de conversiones que incluye una marca de tiempo para cada consulta, lo que permite al usuario realizar un seguimiento de sus conversiones anteriores y ver cuándo y a qué hora se realizaron.
+[✨ Características](#-características) • [🏗️ Arquitectura](#️-arquitectura) • [🚀 Cómo Empezar](#-cómo-empezar) • [📖 Uso](#-uso) • [👨‍💻 Autor](#-autor)
 
-## Tecnologías Utilizadas 💻
+</div>
 
-- **Lenguaje de Programación:** Java
-- **API de Tasas de Cambio:** Se utilizó una API de tasas de cambio en tiempo real para obtener las tasas de conversión entre diferentes divisas.
-- **Biblioteca Gson:** Gson se empleó para analizar la respuesta JSON de la API y convertirla en objetos Java para su manipulación.
-- **Control de Versiones:** Git/GitHub se usaron para el control de versiones del proyecto y la colaboración en equipo.
-- **Entorno de Desarrollo Integrado (IDE):** IntelliJ IDEA fue el entorno de desarrollo utilizado para escribir, depurar y ejecutar el código Java.
+---
 
-## Clases y Funcionalidades 🧩
+## 📋 Descripción
 
-### Calculos.java
+Este **Conversor de Monedas** es una aplicación desarrollada en **Java** como respuesta al desafío técnico propuesto por **Alura Latam** en el programa **Oracle Next Education (ONE)**.
 
-Esta clase es responsable de manejar la lógica relacionada con las conversiones de moneda. Aquí se definen métodos para almacenar valores de moneda, realizar conversiones y obtener mensajes de respuesta.
+La herramienta permite realizar conversiones entre el Dólar Estadounidense (USD) y las principales monedas de Latinoamérica, obteniendo las tasas de cambio más recientes desde una API externa. Además de realizar cálculos precisos, la aplicación registra automáticamente un historial de todas las conversiones, incluyendo fecha y hora, para que puedas llevar un control de tus consultas.
 
-### ConsultaConversion.java
+### 🎯 Propósito del Proyecto
+- Demostrar la aplicación de **Java** y principios de **Programación Orientada a Objetos** en un caso real.
+- Integrar una **API REST** externa para obtener datos en tiempo real.
+- Manejar y parsear respuestas en formato **JSON**.
+- Gestionar la persistencia básica de datos mediante archivos de texto.
+- Crear una **interfaz de consola** clara e interactiva.
 
-Clase responsable de realizar consultas a una API externa para obtener las tasas de cambio entre diferentes monedas.
+---
 
-### GeneradorDeArchivos.java
+## ✨ Características
 
-Esta clase se encarga de guardar el historial de consultas en un archivo de texto.
+| Característica | Descripción |
+| :--- | :--- |
+| **🔄 Tasas en Tiempo Real** | Obtiene los últimos tipos de cambio conectándose a **ExchangeRate-API**. |
+| **📊 Historial de Conversiones** | Guarda cada operación con su timestamp en un archivo `historial.txt`. |
+| **🎯 Enfoque LATAM** | Especializado en conversiones con **Peso Argentino (ARS), Real Brasileño (BRL) y Sol Peruano (PEN)**. |
+| **💻 Interfaz Amigable** | Menú de consola intuitivo con validación de entrada de usuario. |
+| **🧩 Código Modular** | Organizado en clases con responsabilidades bien definidas para fácil mantenimiento. |
 
-### Principal.java
+**Pares de Moneda Disponibles:**
+1.  Dólar (USD) ⇒ Peso Argentino (ARS)
+2.  Peso Argentino (ARS) ⇒ Dólar (USD)
+3.  Dólar (USD) ⇒ Real Brasileño (BRL)
+4.  Real Brasileño (BRL) ⇒ Dólar (USD)
+5.  Dólar (USD) ⇒ Sol Peruano (PEN)
+6.  Sol Peruano (PEN) ⇒ Dólar (USD)
 
-El punto de entrada principal del programa. Aquí se maneja la interacción con el usuario a través de la consola, mostrando un menú de opciones y gestionando las conversiones de moneda.
+---
 
-## 👨‍💻 Desarrollado por
-- David Velasco Fierros
+## 🏗️ Arquitectura
 
-## Instrucciones de Uso 🚀
+El proyecto sigue una estructura modular que separa la lógica de negocio, el acceso a datos y la interacción con el usuario.
 
-1. Clona este repositorio en tu máquina local.
-2. Abre el proyecto en IntelliJ IDEA u otro IDE de tu elección.
-3. Ejecuta la clase Principal.java para iniciar el programa.
-4. Sigue las instrucciones en pantalla para realizar conversiones de moneda.
+```mermaid
+graph TD
+    A[Principal.java] --> B(ConsultaConversion.java);
+    A --> C(Calculos.java);
+    A --> D(GeneradorDeArchivos.java);
+    B --> E[ExchangeRate-API];
+    C --> B;
+    D --> F[historial.txt];
+    
+    style A fill:#4ECDC4
+    style B fill:#FF6B6B
+    style C fill:#FFD166
+    style D fill:#06D6A0
+```
 
-¡Disfruta convirtiendo monedas!
+### 📁 Descripción de Clases
+| Clase | Responsabilidad |
+| :--- | :--- |
+| **`Principal.java`** | Punto de entrada. Controla el flujo del programa y la interfaz de consola. |
+| **`ConsultaConversion.java`** | Gestiona la comunicación HTTP con la API y parsea la respuesta JSON usando **Gson**. |
+| **`Calculos.java`** | Contiene la lógica para realizar los cálculos matemáticos de conversión entre monedas. |
+| **`GeneradorDeArchivos.java`** | Se encarga de escribir y guardar el historial de cada conversión en un archivo de texto. |
 
-## ¿Cómo funciona? 🎥
-Aquí puedes ver una demostración visual de cómo funciona el proyecto:
+### 🛠️ Stack Tecnológico
+- **Lenguaje:** Java 17
+- **Librería JSON:** Gson (de Google) para mapear datos de la API a objetos Java.
+- **HTTP Client:** Cliente HTTP estándar de Java para solicitudes a la API.
+- **Control de Versiones:** Git / GitHub
+- **API Externa:** [ExchangeRate-API](https://www.exchangerate-api.com/) para tasas de cambio.
 
-[Demostración del proyecto](https://youtu.be/a42KEl1l0kY)
+---
+
+## 🚀 Cómo Empezar
+
+### Prerrequisitos
+- **Java Development Kit (JDK) 17** o superior instalado.
+- Una **API Key** gratuita de [ExchangeRate-API](https://www.exchangerate-api.com/).
+- (Opcional) Un IDE como **IntelliJ IDEA** o **VS Code**.
+
+### Instalación y Configuración
+1.  **Clona el repositorio:**
+    ```bash
+    git clone https://github.com/dovalless/conversordemonedas-master.git
+    cd conversordemonedas-master
+    ```
+2.  **Configura tu API Key:**
+    - Abre el archivo `ConsultaConversion.java`.
+    - Localiza la variable que contiene la URL de la API (e.g., `"https://v6.exchangerate-api.com/v6/TU_CLAVE/latest/USD"`).
+    - Reemplaza `TU_CLAVE` con tu API Key personal.
+3.  **Compila y ejecuta:**
+    - Puedes compilar desde consola con `javac` o ejecutar directamente la clase `Principal.java` desde tu IDE.
+
+---
+
+## 📖 Uso
+
+Una vez ejecutado, la aplicación guiará al usuario a través de un menú en consola.
+
+**Ejemplo de Flujo:**
+```text
+****************************************
+Bienvenido al Conversor de Monedas =)
+****************************************
+
+1) Dólar (USD) =>> Peso Argentino (ARS)
+2) Peso Argentino (ARS) =>> Dólar (USD)
+3) Dólar (USD) =>> Real Brasileño (BRL)
+... (Otras opciones)
+7) Salir
+
+Elige una opción válida: 1
+Ingrese el monto que deseas convertir: 20
+El valor: 20.0 [USD] corresponde al valor final de: 19995.0 [ARS]
+****************************************
+```
+
+**Historial Generado:**
+Cada conversión se guarda automáticamente en `historial.txt` con un formato similar a:
+```
+[23-01-2026 10:30] 20.0 USD => 19995.0 ARS
+```
+
+---
+
+## 👨‍💻 Autor
+
+**Darwin Manuel Ovalles Cesar**
+
+*Proyecto desarrollado para completar el Challenge de Conversión del programa **Oracle Next Education (ONE)** en colaboración con **Alura Latam**.*
+
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/darwin-manuel-ovalles-cesar-dev/)
+[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/dovalless)
+
+---
+
+## 📄 Licencia
+
+Este proyecto está distribuido bajo la Licencia MIT. Consulta el archivo `LICENSE` para más información.
+
+---
+<div align="center">
+¡Gracias por visitar este proyecto! Las contribuciones y sugerencias son siempre bienvenidas.
+</div>
